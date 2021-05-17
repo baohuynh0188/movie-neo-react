@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import Carousel from "./Carousel";
 import Item from "./Item";
 import ListGroup from "./ListGroup";
@@ -6,18 +6,21 @@ import { movies } from "../data/movies";
 import { genres } from "../data/genres";
 
 const Container = () => {
+  const [movie, setMovie] = useState(movies);
+  const [genre, setGenre] = useState(genres);
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-lg-3">
           <h1 className="my-4">Genre</h1>
-          <ListGroup genres={genres} />
+          <ListGroup genres={genre} />
         </div>
         <div className="col-lg-9">
-          {/* <Carousel /> */}
+          <Carousel />
           <div className="row my-4"></div>
           <div className="row">
-            <Item movies={movies} />
+            <Item movies={movie} />
           </div>
         </div>
       </div>

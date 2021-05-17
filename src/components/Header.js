@@ -10,9 +10,9 @@ Header.defaultProps = {
   title: "MovieNeo",
 };
 
-const headingStyle = {
-  color: "red",
-  backgroundColor: "blue",
-};
+// const headingStyle = {
+//   color: "red",
+//   backgroundColor: "blue",
+// };
 
 export default Header;
