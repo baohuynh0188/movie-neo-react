@@ -1,11 +1,10 @@
 import React from "react";
 import Card from "./Card";
-import { movies } from "../data/movies";
 
-const Item = () => {
+const Item = (props) => {
   return (
     <>
-      {movies.map((item, index) => (
+      {props.movies.map((item, index) => (
         <Card
           key={index}
           title={item.title}
