@@ -4,7 +4,7 @@ const ListGroupItem = (props) => {
   return (
     <>
       <a className="list-group-item" href={props.url}>
-        {props.title}
+        {props.name}
       </a>
     </>
   );

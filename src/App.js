@@ -1,10 +1,6 @@
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import NotFound from "./components/NotFound";
 import routes from "./routes";
 import { Route, Switch } from "react-router-dom";
 

@@ -21,21 +21,21 @@ const Carousel = () => {
           <div className="carousel-item active">
             <img
               className="d-block img-fluid"
-              src="https://via.placeholder.com/900x350"
+              src="https://via.placeholder.com/1110x350"
               alt="First slide"
             />
           </div>
           <div className="carousel-item">
             <img
               className="d-block img-fluid"
-              src="https://via.placeholder.com/900x350"
+              src="https://via.placeholder.com/1110x350"
               alt="Second slide"
             />
           </div>
           <div className="carousel-item">
             <img
               className="d-block img-fluid"
-              src="https://via.placeholder.com/900x350"
+              src="https://via.placeholder.com/1110x350"
               alt="Third slide"
             />
           </div>

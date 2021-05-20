@@ -1,22 +1,32 @@
-import React from "react";
+import { React } from "react";
+import { Link } from "react-router-dom";
+import Badge from "./Badge";
 
 const Card = (props) => {
   return (
     <>
       <div className="col-lg-4 col-md-6 mb-4">
         <div className="card h-100">
-          <a href={props.url}>
-            <img className="card-img-top" src={props.img} alt="..." />
-          </a>
+          <Link to={props.slug}>
+            <img
+              className="card-img-top"
+              src={`http://127.0.0.1:9000/${props.poster}`}
+              alt="..."
+            />
+          </Link>
           <div className="card-body">
             <h4 className="card-title">
-              <a href={props.url}>{props.title}</a>
+              <Link to={props.slug}>{props.title}</Link>
             </h4>
-            <h6 className="badge badge-info">{props.genre}</h6>
-            <p className="card-text">{props.description}</p>
+            <h5>
+              <Badge genre={props.genre} />
+            </h5>
+            <p className="card-text">{props.content}</p>
           </div>
           <div className="card-footer">
-            <small className="text-muted">★ ★ ★ ★ ☆</small>
+            <small className="text-muted">{props.language} - </small>
+            <small className="text-muted">{props.duration} - </small>
+            <small className="text-muted">{props.year}</small>
           </div>
         </div>
       </div>

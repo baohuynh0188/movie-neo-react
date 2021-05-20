@@ -10,6 +10,12 @@ const navs = [
   },
   {
     exact: false,
+    to: "/recommend",
+    className: "nav-link",
+    label: "Recommend",
+  },
+  {
+    exact: false,
     to: "/register",
     className: "nav-link",
     label: "Register",
@@ -53,13 +59,8 @@ const HandleNavLink = (nav) => {
   if (nav.length > 0) {
     result = nav.map((item, index) => {
       return (
-        <li className="nav-item">
-          <NavLink
-            key={index}
-            exact={item.exact}
-            className={item.className}
-            to={item.to}
-          >
+        <li className="nav-item" key={index}>
+          <NavLink exact={item.exact} className={item.className} to={item.to}>
             {item.label}
           </NavLink>
         </li>

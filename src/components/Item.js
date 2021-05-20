@@ -2,16 +2,28 @@ import React from "react";
 import Card from "./Card";
 
 const Item = (props) => {
+  if (props.loading === true) {
+    return (
+      <div className="col-lg-12 my-4">
+        <h1 className="text-center">Loading...</h1>
+      </div>
+    );
+  }
   return (
     <>
       {props.movies.map((item, index) => (
         <Card
           key={index}
-          title={item.title}
-          description={item.description}
+          id={item.movie.id}
+          title={item.movie.title}
+          content={item.movie.content}
+          duration={item.movie.duration}
+          language={item.movie.language}
+          timestamp={item.movie.timestamp}
+          year={item.movie.year}
           genre={item.genre}
-          url={item.url}
-          img={item.img}
+          slug={item.movie.slug}
+          poster={item.movie.poster}
         />
       ))}
     </>
