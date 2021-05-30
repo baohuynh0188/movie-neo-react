@@ -5,9 +5,13 @@ class MovieApi {
     const url = "/movies";
     return axiosClient.get(url, { params });
   };
-  getbySlug = (slug) => {
+  getBySlug = (slug) => {
     const url = `/movies/${slug}`;
     return axiosClient.get(url);
+  };
+  getByContent = (params) => {
+    const url = "/rec_engine/content";
+    return axiosClient.post(url, params);
   };
 }
 

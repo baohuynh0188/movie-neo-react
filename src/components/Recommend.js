@@ -11,8 +11,10 @@ const Recommend = () => {
       setLoading(true);
       try {
         const response = await movieApi.getAll();
-        setMovie(response.data);
-        setLoading(false);
+        if (response !== undefined) {
+          setMovie(response.data);
+          setLoading(false);
+        }
       } catch (error) {
         console.error(error);
       }

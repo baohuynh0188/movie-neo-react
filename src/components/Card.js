@@ -19,7 +19,7 @@ const Card = (props) => {
               <Link to={props.slug}>{props.title}</Link>
             </h4>
             <h5>
-              <Badge genre={props.genre} />
+              <Badge genres={props.genres} />
             </h5>
             <p className="card-text">{props.content}</p>
           </div>

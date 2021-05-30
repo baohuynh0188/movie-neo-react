@@ -1,22 +1,40 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router";
+import Item from "./Item";
 import movieApi from "../api/movieApi";
 import Badge from "./Badge";
+import Rating from "./Rating";
 
 const Detail = () => {
   const params = useParams();
+  const [loading, setLoading] = useState(false);
   const [movie, setMovie] = useState([]);
+  const [recommend, setRecommend] = useState([]);
 
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        const response = await movieApi.getbySlug(params.slug);
+        const response = await movieApi.getBySlug(params.slug);
         setMovie(response.data);
       } catch (error) {
         console.error(error);
       }
     };
+    const fetchRecommendContent = async () => {
+      setLoading(true);
+      try {
+        const response = await movieApi.getByContent({
+          slug: params.slug,
+        });
+        setRecommend(response.data);
+        setLoading(false);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchMovie();
+    fetchRecommendContent();
   }, []);
   return (
     <div className="container">
@@ -32,7 +50,7 @@ const Detail = () => {
               <div className="card-body">
                 <h3 className="card-title">{item.movie.title}</h3>
                 <h5>
-                  <Badge genre={item.genre} />
+                  <Badge genres={item.genres} />
                 </h5>
                 <p className="card-text">{item.movie.content}</p>
                 <span className="text-info">
@@ -45,54 +63,10 @@ const Detail = () => {
         </div>
       </div>
       <div className="row mt-4">
-        <div className="col-lg-4 col-md-6 mb-4">
-          <div className="card h-100">
-            <a href="#!">
-              <img
-                className="card-img-top"
-                src="https://via.placeholder.com/700x400"
-                alt="..."
-              />
-            </a>
-            <div className="card-body">
-              <h4 className="card-title">
-                <a href="#!">Item One</a>
-              </h4>
-              <h5>$24.99</h5>
-              <p className="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                numquam aspernatur!
-              </p>
-            </div>
-            <div className="card-footer">
-              <small className="text-muted">★ ★ ★ ★ ☆</small>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-4 col-md-6 mb-4">
-          <div className="card h-100">
-            <a href="#!">
-              <img
-                className="card-img-top"
-                src="https://via.placeholder.com/700x400"
-                alt="..."
-              />
-            </a>
-            <div className="card-body">
-              <h4 className="card-title">
-                <a href="#!">Item One</a>
-              </h4>
-              <h5>$24.99</h5>
-              <p className="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                numquam aspernatur!
-              </p>
-            </div>
-            <div className="card-footer">
-              <small className="text-muted">★ ★ ★ ★ ☆</small>
-            </div>
-          </div>
-        </div>
+        <Rating movieSlug={params.slug} />
+      </div>
+      <div className="row mt-4">
+        <Item movies={recommend} loading={loading} />
       </div>
     </div>
   );

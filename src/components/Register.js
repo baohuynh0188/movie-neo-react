@@ -1,11 +1,30 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Redirect, useHistory } from "react-router-dom";
+import userApi from "../api/userApi";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(JSON.stringify(data));
+  let history = useHistory();
+  const onSubmit = async (data) => {
+    if (data.username !== null && data.password !== null) {
+      try {
+        const response = await userApi.register({
+          email: data.email,
+          username: data.username,
+          name: data.name,
+          password: data.password,
+        });
+        localStorage.setItem("token", response.data.token);
+        history.push("/");
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
+
+  useEffect(() => {}, []);
+
   return (
     <div className="container">
       <div className="row">

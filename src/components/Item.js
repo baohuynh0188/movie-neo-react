@@ -21,7 +21,7 @@ const Item = (props) => {
           language={item.movie.language}
           timestamp={item.movie.timestamp}
           year={item.movie.year}
-          genre={item.genre}
+          genres={item.genres}
           slug={item.movie.slug}
           poster={item.movie.poster}
         />

@@ -1,34 +1,22 @@
-import React from "react";
-import { NavLink, Link } from "react-router-dom";
-
-const navs = [
-  {
-    exact: true,
-    to: "/",
-    className: "nav-link",
-    label: "Home",
-  },
-  {
-    exact: false,
-    to: "/recommend",
-    className: "nav-link",
-    label: "Recommend",
-  },
-  {
-    exact: false,
-    to: "/register",
-    className: "nav-link",
-    label: "Register",
-  },
-  {
-    exact: false,
-    to: "/login",
-    className: "nav-link",
-    label: "Login",
-  },
-];
+import { React, useState } from "react";
+import { NavLink, Link, useHistory } from "react-router-dom";
 
 const Navigation = () => {
+  let history = useHistory();
+  const [isLogin, setIsLogin] = useState(() => {
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      return false;
+    }
+    return true;
+  });
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setIsLogin(false);
+    history.push("/login");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -47,27 +35,45 @@ const Navigation = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav ml-auto">{HandleNavLink(navs)}</ul>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <NavLink exact className="nav-link" to="/">
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink exact className="nav-link" to="/recommend">
+                Recommend
+              </NavLink>
+            </li>
+
+            {!isLogin ? (
+              <>
+                <li className="nav-item">
+                  <NavLink exact className="nav-link" to="/register">
+                    Register
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink exact className="nav-link" to="/login">
+                    Login
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <button className="btn btn-danger" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
+          </ul>
         </div>
       </div>
     </nav>
   );
-};
-
-const HandleNavLink = (nav) => {
-  var result = null;
-  if (nav.length > 0) {
-    result = nav.map((item, index) => {
-      return (
-        <li className="nav-item" key={index}>
-          <NavLink exact={item.exact} className={item.className} to={item.to}>
-            {item.label}
-          </NavLink>
-        </li>
-      );
-    });
-  }
-  return result;
 };
 
 export default Navigation;
