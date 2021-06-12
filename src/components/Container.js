@@ -38,9 +38,7 @@ const Container = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-lg-12">
-          <Carousel />
-        </div>
+        <div className="col-lg-12">{/* <Carousel /> */}</div>
       </div>
       <div className="row">
         <div className="col-lg-3">

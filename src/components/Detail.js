@@ -42,11 +42,7 @@ const Detail = () => {
         <div className="col-lg-12">
           {movie.map((item, index) => (
             <div key={index} className="card mt-4">
-              <img
-                className="card-img-top img-fluid"
-                src={`http://127.0.0.1:9000/${item.movie.poster}`}
-                alt="..."
-              />
+              <iframe width="auto" height="720" src={item.movie.url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               <div className="card-body">
                 <h3 className="card-title">{item.movie.title}</h3>
                 <h5>

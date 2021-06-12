@@ -55,7 +55,9 @@ const Rating = (props) => {
           <div className="card-body">
             <h5 className="card-title">IMDB</h5>
             <h1 className="card-text text-center display-4">
-              <span className="badge badge-warning">{rating}</span>
+              <span className="badge badge-warning">
+                {parseFloat(rating).toFixed(2)}
+              </span>
             </h1>
           </div>
         </div>

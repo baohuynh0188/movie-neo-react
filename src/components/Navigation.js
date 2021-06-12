@@ -1,19 +1,24 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
+import { useStateValue } from "../context/StateProvider";
+import { ACTION_TYPE } from "../reducers/reducer";
+import tools from "../tools";
 
 const Navigation = () => {
   let history = useHistory();
-  const [isLogin, setIsLogin] = useState(() => {
-    const token = localStorage.getItem("token");
-    if (token == null) {
-      return false;
-    }
-    return true;
-  });
+
+  const [state, dispatch] = useStateValue();
+
+  let userLogin = "";
+  if (localStorage.getItem("token")) {
+    userLogin = tools.parseJwt(localStorage.getItem("token")).sub;
+  } else {
+    userLogin = "";
+  }
 
   const handleLogout = () => {
     localStorage.clear();
-    setIsLogin(false);
+    dispatch({ type: ACTION_TYPE.SIGN_OUT });
     history.push("/login");
   };
 
@@ -47,7 +52,7 @@ const Navigation = () => {
               </NavLink>
             </li>
 
-            {!isLogin ? (
+            {!state.isSignIn ? (
               <>
                 <li className="nav-item">
                   <NavLink exact className="nav-link" to="/register">
@@ -62,6 +67,11 @@ const Navigation = () => {
               </>
             ) : (
               <>
+                <li className="nav-item">
+                  <Link className="nav-link " to="/profile">
+                    {userLogin}
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <button className="btn btn-danger" onClick={handleLogout}>
                     Logout

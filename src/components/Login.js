@@ -1,12 +1,19 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Redirect, useHistory } from "react-router-dom";
 import userApi from "../api/userApi";
+import { useStateValue } from "../context/StateProvider";
+import { ACTION_TYPE } from "../reducers/reducer";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const [isLogin, setIsLogin] = useState(false);
+  const [state, dispatch] = useStateValue();
+  const [mess, setMess] = useState(false);
+
+  console.log(state.isSignIn);
+
   let history = useHistory();
+
   const onSubmit = async (data) => {
     if (data.username !== null && data.password !== null) {
       try {
@@ -14,23 +21,20 @@ const Login = () => {
           username: data.username,
           password: data.password,
         });
-        localStorage.setItem("token", response.data.token);
-        history.push("/");
+        if (response.status === 200) {
+          localStorage.setItem("token", response.data.token);
+          dispatch({ type: ACTION_TYPE.SIGN_IN });
+          history.push("/");
+          console.log(state.isSignIn);
+        }
       } catch (error) {
         console.error(error);
+        setMess(true);
       }
     }
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, []);
-
-  if (isLogin === true) {
+  if (state.isSignIn === true) {
     return <Redirect to="/" />;
   } else {
     return (
@@ -64,6 +68,11 @@ const Login = () => {
                   required
                 />
               </div>
+              {mess ? (
+                <div className="alert alert-danger" role="alert">
+                  Wrong username or password, please try again
+                </div>
+              ) : ""}
               <button type="submit" className="btn btn-success">
                 Login
               </button>

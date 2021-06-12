@@ -5,7 +5,7 @@ const ListGroup = (props) => {
   return (
     <div className="list-group">
       {props.genres.map((item, index) => (
-        <ListGroupItem key={index} name={item.name} url={item.url} />
+        <ListGroupItem key={index} name={item.name} url={item.name} />
       ))}
     </div>
   );

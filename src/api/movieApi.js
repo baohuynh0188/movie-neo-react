@@ -13,6 +13,10 @@ class MovieApi {
     const url = "/rec_engine/content";
     return axiosClient.post(url, params);
   };
+  getByUser = (params) => {
+    const url = "/rec_engine/collab";
+    return axiosClient.post(url, params);
+  };
 }
 
 const movieApi = new MovieApi();

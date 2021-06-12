@@ -3,8 +3,22 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import routes from "./routes";
 import { Route, Switch } from "react-router-dom";
+import { useStateValue } from "./context/StateProvider";
+import { ACTION_TYPE } from "./reducers/reducer";
+import { React, useEffect } from "react";
 
 const App = () => {
+  const [state, dispatch] = useStateValue();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      dispatch({ type: ACTION_TYPE.SIGN_OUT });
+    } else {
+      dispatch({ type: ACTION_TYPE.SIGN_IN });
+    }
+  }, []);
+
   return (
     <div className="App">
       <Header />

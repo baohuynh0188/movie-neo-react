@@ -4,6 +4,8 @@ import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import Recommend from "./components/Recommend";
 import Detail from "./components/Detail";
+import Genre from "./components/Genre";
+import Profile from "./components/Profile";
 
 const routes = [
   {
@@ -24,6 +26,17 @@ const routes = [
   {
     path: "/recommend",
     component: () => <Recommend />,
+    exact: false,
+  },
+  {
+    path: "/profile",
+    component: () => <Profile />,
+    exact: false,
+  },
+
+  {
+    path: "/genre/:genre",
+    component: () => <Genre />,
     exact: false,
   },
   {

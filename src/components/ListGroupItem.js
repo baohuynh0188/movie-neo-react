@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ListGroupItem = (props) => {
   return (
     <>
-      <a className="list-group-item" href={props.url}>
+      <Link to={"genre/" + props.url} className="list-group-item">
         {props.name}
-      </a>
+      </Link>
     </>
   );
 };
