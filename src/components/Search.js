@@ -1,25 +1,29 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router";
-import genreApi from "../api/genreApi"
+import { useLocation } from "react-router-dom";
+import movieApi from "../api/movieApi";
 import Item from "./Item";
 
-const Genre = () => {
-    const params = useParams();
+const Search = () => {
+    const location = useLocation();
     const [loading, setLoading] = useState(false);
     const [movie, setMovie] = useState([]);
-    const getGenre = params.genre;
+
+    console.log(location.search)
+
     useEffect(() => {
         const fetchMovie = async () => {
+            setLoading(true);
             try {
-                const response = await genreApi.getMovieByGenre(getGenre);
+                const response = await movieApi.searchByName(location.search);
                 setMovie(response.data);
+                setLoading(false);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchMovie();
-    }, []);
-    console.log(getGenre);
+    }, [location.search]);
+
     return (
         <div className="container">
             <div className="row">
@@ -27,12 +31,11 @@ const Genre = () => {
                 <div className="col-lg-10">
                     <div className="row my-4"></div>
                     <div className="row my-4">
-                        <Item movies={movie} loading={loading} />
+                        <Item movies={movie} notFound={loading} />
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
-
-export default Genre
+export default Search

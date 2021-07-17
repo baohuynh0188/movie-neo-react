@@ -35,13 +35,15 @@ const Recommend = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-lg-12">
+        <div className="col-lg-1"></div>
+        <div className="col-lg-10">
           <div className="row my-4"></div>
-          <div className="row">
+          <div className="row my-4">
             <Item movies={movie} loading={loading} />
           </div>
         </div>
       </div>
+      <div className="col-lg-1"></div>
     </div>
   );
 };

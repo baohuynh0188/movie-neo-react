@@ -43,7 +43,7 @@ const Login = () => {
           <div className="col-lg-12 my-4">
             <h1 className="text-center">Login</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="exampleInputUsername">Username</label>
                 <input
                   {...register("username", { required: true, maxLength: 20 })}
@@ -57,7 +57,7 @@ const Login = () => {
                   We'll never share your information with anyone else.
                 </small>
               </div>
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input
                   {...register("password", { required: true })}
@@ -69,7 +69,7 @@ const Login = () => {
                 />
               </div>
               {mess ? (
-                <div className="alert alert-danger" role="alert">
+                <div className="alert alert-danger mb-3" role="alert">
                   Wrong username or password, please try again
                 </div>
               ) : ""}

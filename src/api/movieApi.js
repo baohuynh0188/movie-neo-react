@@ -17,6 +17,10 @@ class MovieApi {
     const url = "/rec_engine/collab";
     return axiosClient.post(url, params);
   };
+  searchByName = (search) => {
+    const url = `/movies/search${search}`;
+    return axiosClient.get(url);
+  };
 }
 
 const movieApi = new MovieApi();

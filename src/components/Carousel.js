@@ -2,70 +2,28 @@ import React from "react";
 
 const Carousel = () => {
   return (
-    <>
-      <div
-        className="carousel slide my-4"
-        id="carouselExampleIndicators"
-        data-ride="carousel"
-      >
-        <ol className="carousel-indicators">
-          <li
-            className="active"
-            data-target="#carouselExampleIndicators"
-            data-slide-to="0"
-          ></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div className="carousel-inner" role="listbox">
-          <div className="carousel-item active">
-            <img
-              className="d-block img-fluid"
-              src="https://via.placeholder.com/1110x350"
-              alt="First slide"
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              className="d-block img-fluid"
-              src="https://via.placeholder.com/1110x350"
-              alt="Second slide"
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              className="d-block img-fluid"
-              src="https://via.placeholder.com/1110x350"
-              alt="Third slide"
-            />
-          </div>
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="https://via.placeholder.com/1110x350" alt="First slide" />
         </div>
-        <a
-          className="carousel-control-prev"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-next"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Next</span>
-        </a>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://via.placeholder.com/1110x360" alt="Second slide" />
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://via.placeholder.com/1110x340" alt="Third slide" />
+        </div>
       </div>
-    </>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
   );
 };
 

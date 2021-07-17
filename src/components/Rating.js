@@ -9,6 +9,7 @@ const Rating = (props) => {
     const user = tools.parseJwt(localStorage.getItem("token"));
     return user;
   });
+
   const ratingChanged = async (newRating) => {
     try {
       const response = await ratingApi.postRating({
@@ -17,6 +18,9 @@ const Rating = (props) => {
         rating: newRating,
       });
       console.log(response.data);
+      console.log(props.movieSlug);
+      console.log(username.sub);
+      console.log(newRating);
     } catch (error) {
       console.error(error);
     }
@@ -55,8 +59,8 @@ const Rating = (props) => {
           <div className="card-body">
             <h5 className="card-title">IMDB</h5>
             <h1 className="card-text text-center display-4">
-              <span className="badge badge-warning">
-                {parseFloat(rating).toFixed(2)}
+              <span className="badge bg-warning">
+                {isNaN(parseFloat(rating).toFixed(2)) ? 0 : parseFloat(rating).toFixed(2)}
               </span>
             </h1>
           </div>

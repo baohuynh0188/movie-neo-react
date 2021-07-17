@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Redirect, useHistory } from "react-router-dom";
 import userApi from "../api/userApi";
@@ -8,6 +8,7 @@ import { ACTION_TYPE } from "../reducers/reducer";
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const [state, dispatch] = useStateValue();
+  const [mess, setMess] = useState(false);
   let history = useHistory();
 
   const onSubmit = async (data) => {
@@ -24,6 +25,7 @@ const Register = () => {
         history.push("/");
       } catch (error) {
         console.error(error);
+        setMess(true);
       }
     }
   };
@@ -34,10 +36,10 @@ const Register = () => {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-lg-12 my-4">
+          <div className="col-lg-8 my-4 mx-auto">
             <h1 className="text-center">Register</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="exampleInputUsername">Username</label>
                 <input
                   {...register("username", { required: true, maxLength: 20 })}
@@ -48,7 +50,7 @@ const Register = () => {
                   required
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
                   {...register("email", { required: true })}
@@ -63,7 +65,7 @@ const Register = () => {
                   We'll never share your email with anyone else.
                 </small>
               </div>
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="exampleInputFullname">Full name</label>
                 <input
                   {...register("name", { required: true })}
@@ -74,7 +76,7 @@ const Register = () => {
                   required
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input
                   {...register("password", { required: true, minlength: 8, maxLength: 20 })}
@@ -87,7 +89,12 @@ const Register = () => {
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-success">
+              {mess ? (
+                <div className="alert alert-danger mb-3" role="alert">
+                  Something went wrong, please try again
+                </div>
+              ) : ""}
+              <button type="submit" className="btn btn-success mt-2">
                 Register
               </button>
             </form>
