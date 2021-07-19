@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import Carousel from "./Carousel";
-import Pagination from "./Pagination";
+// import Pagination from "./Pagination";
 import Item from "./Item";
 import ListGroup from "./ListGroup";
 import movieApi from "../api/movieApi";
@@ -62,6 +62,9 @@ const Container = () => {
 
   return (
     <div className="container">
+      <div className="row mt-3">
+        <Carousel movies={movie} />
+      </div>
       <div className="row mt-3">
         <div className="col-3"></div>
         <div className="col-9">

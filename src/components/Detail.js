@@ -1,10 +1,12 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import Item from "./Item";
 import movieApi from "../api/movieApi";
 import Badge from "./Badge";
 import Rating from "./Rating";
 import Comment from "./Comment";
+import Slider from "react-slick";
 
 const Detail = () => {
   const params = useParams();
@@ -38,6 +40,20 @@ const Detail = () => {
     fetchMovie();
     fetchRecommendContent();
   }, [params.slug]);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    // speed: 2000,
+    lazyLoad: true,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    pauseOnHover: true
+  };
+
   if (loading === false) {
     return (
       <div className="container">
@@ -69,8 +85,15 @@ const Detail = () => {
             <Comment slug={slug} />
           </div>
         </div>
-        <div className="row mb-4">
-          <Item movies={recommend} loading={loading} />
+        <div className="row mb-5">
+          {/* {recommend ? <Item movies={recommend} loading={loading} /> : <h2>...</h2>} */}
+          <Slider {...settings}>
+            {recommend.map((item, index) => (
+              <div className="p-2">
+                <Link to={item.movie.slug}><img className="image" src={`http://127.0.0.1:9000/${item.movie.poster}`} /></Link>
+              </div>
+            ))}
+          </Slider>
         </div>
       </div>
     );

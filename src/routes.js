@@ -42,7 +42,7 @@ const routes = [
   {
     path: "/genre/:genre",
     component: () => <Genre />,
-    exact: false,
+    exact: true,
   },
   {
     path: "/:slug",

@@ -6,6 +6,8 @@ import { Route, Switch } from "react-router-dom";
 import { useStateValue } from "./context/StateProvider";
 import { ACTION_TYPE } from "./reducers/reducer";
 import { React, useEffect } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const App = () => {
   const [state, dispatch] = useStateValue();

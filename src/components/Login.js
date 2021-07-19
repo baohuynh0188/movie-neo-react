@@ -1,12 +1,21 @@
 import { React, useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 import { Redirect, useHistory } from "react-router-dom";
 import userApi from "../api/userApi";
 import { useStateValue } from "../context/StateProvider";
 import { ACTION_TYPE } from "../reducers/reducer";
 
+const schema = yup.object().shape({
+  username: yup.string().min(3, 'Username must be at least 3 characters').trim("No blank").required("Username is required"),
+  password: yup.string().min(8, 'Password must be at least 8 characters').trim("No blank").required("Password is required"),
+});
+
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
   const [state, dispatch] = useStateValue();
   const [mess, setMess] = useState(false);
 
@@ -40,33 +49,33 @@ const Login = () => {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-lg-12 my-4">
+          <div className="col-lg-6 my-4 mx-auto">
             <h1 className="text-center">Login</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-group mb-3">
                 <label htmlFor="exampleInputUsername">Username</label>
                 <input
-                  {...register("username", { required: true, maxLength: 20 })}
+                  {...register("username")}
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errors.username ? 'is-invalid' : 'is-valid'}`}
                   id="exampleInputUsername"
                   placeholder="Enter username"
-                  required
                 />
                 <small id="emailHelp" className="form-text text-muted">
                   We'll never share your information with anyone else.
                 </small>
+                <p className="text-danger">{errors.username?.message}</p>
               </div>
               <div className="form-group mb-3">
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input
-                  {...register("password", { required: true })}
+                  {...register("password")}
                   type="password"
-                  className="form-control"
+                  className={`form-control ${errors.password ? 'is-invalid' : 'is-valid'}`}
                   id="exampleInputPassword1"
                   placeholder="Password"
-                  required
                 />
+                <p className="text-danger">{errors.password?.message}</p>
               </div>
               {mess ? (
                 <div className="alert alert-danger mb-3" role="alert">
