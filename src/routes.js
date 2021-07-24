@@ -7,6 +7,7 @@ import Detail from "./components/Detail";
 import Genre from "./components/Genre";
 import Profile from "./components/Profile";
 import Search from "./components/Search";
+import ChangeProfile from "./components/ChangeProfile";
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
   {
     path: "/search",
     component: () => <Search />,
+    exact: false,
+  },
+  {
+    path: "/change-profile",
+    component: () => <ChangeProfile />,
     exact: false,
   },
   {

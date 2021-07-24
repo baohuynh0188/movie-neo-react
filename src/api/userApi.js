@@ -12,11 +12,15 @@ class UserApi {
   profile = (params) => {
     const url = "/profile";
     return axiosClient.post(url, params);
-  }
+  };
   changePassword = (params) => {
     const url = "/change-password";
     return axiosClient.post(url, params);
-  }
+  };
+  changeProfile = (params) => {
+    const url = "/change-profile";
+    return axiosClient.post(url, params);
+  };
 }
 const userApi = new UserApi();
 export default userApi;
